@@ -6,6 +6,10 @@ const FooterContainer = styled.footer`
   background-color: #1a73e8;
   color: white;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 30px 0;  /* Reduce padding on mobile */
+  }
 `;
 
 const FooterLinks = styled.div`
@@ -19,6 +23,11 @@ const FooterLinks = styled.div`
     &:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 768px) {
+      display: block;  /* Stack footer links vertically on mobile */
+      margin-bottom: 10px;
+    }
   }
 `;
 
@@ -28,7 +37,7 @@ const Copyright = styled.p`
 
 const Footer = () => {
   return (
-    <FooterContainer id="footer">
+    <FooterContainer>
       <FooterLinks>
         <a href="#home">Home</a>
         <a href="#book-demo">Book Demo</a>

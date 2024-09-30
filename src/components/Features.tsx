@@ -1,25 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Styled components for the section, grid, and feature cards
 const FeaturesSection = styled.section`
   padding: 100px 0;
   text-align: center;
+  background-color: #f9f9f9;
 `;
 
 const Heading = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 50px;
   color: #202124;
+
+  @media (max-width: 768px) {
+    font-size: 2rem; /* Adjust heading size on mobile */
+  }
 `;
 
 const FeaturesGrid = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;  /* Ensures content wraps on smaller screens */
+  gap: 20px;  /* Adds space between feature cards */
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto;  /* Centers the grid horizontally */
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column;  /* Stack feature cards vertically on mobile */
+    align-items: center;  /* Center align items */
   }
 `;
 
@@ -36,8 +45,7 @@ const FeatureCard = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 80%;
-    margin-bottom: 20px;
+    width: 80%;  /* Make cards take up most of the width on mobile */
   }
 `;
 
@@ -52,6 +60,7 @@ const FeatureDescription = styled.p`
   color: #666;
 `;
 
+// Features Component
 const Features = () => {
   return (
     <FeaturesSection id="features">

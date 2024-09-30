@@ -2,44 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-// Styled Components for Hero Section
-const HeroSection = styled.section`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #f1f3f4;
-  padding-top: 100px; /* Account for the fixed header */
-
-  @media (max-width: 768px) {
-    padding-top: 80px;
-  }
-`;
-
-const Heading = styled(motion.h1)`
-  font-size: 4rem;
-  font-weight: 700;
-  color: #202124;
-
-  @media (max-width: 768px) {
-    font-size: 3rem;
-  }
-`;
-
-const SubHeading = styled(motion.p)`
-  font-size: 1.5rem;
-  color: #5f6368;
-  margin-top: 20px;
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-`;
-
 const CTAButton = styled(motion.a)`
-  margin-top: 30px;
+  margin-top: 20px;  /* Adjust this margin to add space above the button */
   padding: 10px 30px;
   background-color: #1a73e8;
   color: white;
@@ -52,6 +16,45 @@ const CTAButton = styled(motion.a)`
   }
 `;
 
+const HeroSection = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f1f3f4;
+  padding-top: 100px; /* Account for the fixed header */
+
+  @media (max-width: 768px) {
+    padding-top: 80px;  /* Adjust padding on mobile */
+  }
+`;
+
+const Heading = styled(motion.h1)`
+  font-size: 4rem;
+  font-weight: 700;
+  color: #202124;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;  /* Reduce font size on mobile */
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;  /* Further reduce font size on small phones */
+  }
+`;
+
+const SubHeading = styled(motion.p)`
+  font-size: 1.5rem;
+  color: #5f6368;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;  /* Smaller font size for mobile */
+  }
+`;
+
 const HeroImage = styled(motion.img)`
   margin-top: 40px;
   max-width: 90%;
@@ -60,8 +63,8 @@ const HeroImage = styled(motion.img)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
-    margin-top: 20px;
-    max-width: 100%;
+    margin-top: 20px;  /* Smaller margin on mobile */
+    max-width: 100%;  /* Full width on mobile */
   }
 `;
 
@@ -93,7 +96,7 @@ const Hero = () => {
       
       {/* Image Below Button */}
       <HeroImage
-        src="https://picsum.photos/1200/600" // Replace with the actual path of the image
+        src="https://picsum.photos/500/500"
         alt="Tenderai Dashboard Preview"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
