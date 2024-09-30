@@ -1,0 +1,106 @@
+import React from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+// Styled Components for Hero Section
+const HeroSection = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f1f3f4;
+  padding-top: 100px; /* Account for the fixed header */
+
+  @media (max-width: 768px) {
+    padding-top: 80px;
+  }
+`;
+
+const Heading = styled(motion.h1)`
+  font-size: 4rem;
+  font-weight: 700;
+  color: #202124;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+`;
+
+const SubHeading = styled(motion.p)`
+  font-size: 1.5rem;
+  color: #5f6368;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+`;
+
+const CTAButton = styled(motion.a)`
+  margin-top: 30px;
+  padding: 10px 30px;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1558c4;
+  }
+`;
+
+const HeroImage = styled(motion.img)`
+  margin-top: 40px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+`;
+
+const Hero = () => {
+  return (
+    <HeroSection>
+      <Heading
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Win More Government Bids
+      </Heading>
+      <SubHeading
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 1 }}
+      >
+        With More Confidence using Tenderai's AI-driven platform
+      </SubHeading>
+      <CTAButton
+        href="#book-demo"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+      >
+        Book Demo
+      </CTAButton>
+      
+      {/* Image Below Button */}
+      <HeroImage
+        src="https://picsum.photos/1200/600" // Replace with the actual path of the image
+        alt="Tenderai Dashboard Preview"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+      />
+    </HeroSection>
+  );
+};
+
+export default Hero;
