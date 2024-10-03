@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const CTAButton = styled(motion.a)`
+const CTAButton = styled(motion(Link))`
   margin-top: 20px;  /* Adjust this margin to add space above the button */
   padding: 10px 30px;
   background-color: #1a73e8;
@@ -86,14 +86,14 @@ const Hero = () => {
         With More Confidence using Tenderai's AI-driven platform
       </SubHeading>
       <CTAButton
-        href="#book-demo"
+        to="/search"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        Book Demo
+        Find Tender
       </CTAButton>
-      
+
       {/* Image Below Button */}
       <HeroImage
         src="https://picsum.photos/500/500"

@@ -1,18 +1,19 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Footer from './components/Footer';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import SearchPage from './pages/Listing';
 import { GlobalStyles } from './styles/GlobalStyles';
 
 const App: React.FC = () => {
   return (
     <>
-      <GlobalStyles></GlobalStyles>
-      <Header />
-      <Hero />
-      <Features />
-      <Footer />
+      <GlobalStyles />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+      </Router>
     </>
   );
 };
