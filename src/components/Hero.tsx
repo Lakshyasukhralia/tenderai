@@ -25,9 +25,11 @@ const HeroSection = styled.section`
   text-align: center;
   background-color: #f1f3f4;
   padding-top: 100px; /* Account for the fixed header */
+  padding-bottom: 100px; /* Account for the fixed header */
 
   @media (max-width: 768px) {
     padding-top: 80px;  /* Adjust padding on mobile */
+  padding-bottom: 80px; /* Account for the fixed header */
   }
 `;
 
@@ -96,7 +98,7 @@ const Hero = () => {
 
       {/* Image Below Button */}
       <HeroImage
-        src="https://picsum.photos/500/500"
+        src="https://picsum.photos/1000/600"
         alt="Tenderai Dashboard Preview"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

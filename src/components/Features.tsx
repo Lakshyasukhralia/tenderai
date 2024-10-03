@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Styled components for the section, grid, and feature cards
 const FeaturesSection = styled.section`
-  padding: 100px 0;
+  padding: 65px 0;
   text-align: center;
   background-color: #f9f9f9;
 `;

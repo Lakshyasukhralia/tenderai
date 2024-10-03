@@ -7,6 +7,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html, body {
+    height: 100%;  /* Ensure the body takes the full height of the viewport */
+  }
+
   body {
     font-family: 'Poppins', sans-serif; /* Apply Poppins font */
     background-color: #f1f3f4;
