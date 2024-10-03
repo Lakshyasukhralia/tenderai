@@ -1,7 +1,7 @@
-import React from 'react';
+
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-scroll';
-import { CTAButton, LoginButton } from '../styles/Buttons';
+import { CTAButton } from '../styles/Buttons';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -24,7 +24,10 @@ const HeaderContainer = styled.header`
 const Logo = styled.h1`
   font-size: 1.8rem;
   color: #333;
-
+  a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the color from parent (Logo) */
+  }
   @media (max-width: 768px) {
     font-size: 1.5rem;  /* Reduce font size on mobile */
   }
@@ -86,21 +89,21 @@ const ButtonsContainer = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Logo>Tenderai</Logo>
+      <Logo><Link to="/">Tenderai</Link> </Logo>
       <NavLinks>
         <ul>
           <li>
-            <Link to="features" smooth={true} duration={500}>
+            <Link to="features" >
               RFPs
             </Link>
           </li>
           <li>
-            <Link to="customers" smooth={true} duration={500}>
+            <Link to="customers" >
               Customers
             </Link>
           </li>
           <li>
-            <Link to="final-check" smooth={true} duration={500}>
+            <Link to="final-check" >
               Final Check
             </Link>
           </li>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CustomDropdown from '../components/CustomDropdown';
+import Header from '../components/Header';
 
 // Define types for the tender items
 interface TenderItem {
@@ -19,9 +20,13 @@ const SearchContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
+  margin-top: 70px;
   width: 100%;
   padding: 20px;
   background-color: #f1f1f1;
+    @media (max-width: 768px) {
+    margin-top: 150px;
+  }
 `;
 
 const Heading = styled.p`
@@ -163,6 +168,8 @@ const ListingPage = () => {
     });
 
   return (
+    <>
+    <Header></Header>
     <SearchContainer>
       <Heading>Search Tenders.</Heading>
       {/* Search input field */}
@@ -205,6 +212,7 @@ const ListingPage = () => {
 
       )}
     </SearchContainer>
+    </>
   );
 };
 
