@@ -93,12 +93,14 @@ const ListItem = styled.li`
 const ItemTitle = styled.h3`
   font-size: 1.2rem;
   color: #333;
+  width: 100%;
   margin-bottom: 10px;
 `;
 
 const ItemDescription = styled.p`
   font-size: 0.9rem;
   color: #666;
+  width: 100%;
   margin-bottom: 10px;  /* Add some space between description and date */
 `;
 
