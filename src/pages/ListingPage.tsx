@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CustomDropdown from '../components/CustomDropdown';
-import { Link } from 'react-router-dom';
 
 // Define types for the tender items
 interface TenderItem {
@@ -30,6 +30,10 @@ const Heading = styled.p`
   max-width: 1200px; /* Same width as SearchInput */
   font-size: 3rem;
   margin-bottom: 20px; /* Add some space between the heading and input */
+  @media (max-width: 768px) {
+    font-size: 2rem; /* Reduce font size on mobile */
+    margin-bottom: 0; /* Add some space between the heading and input */
+  }
 `;
 
 const SearchInput = styled.input`
