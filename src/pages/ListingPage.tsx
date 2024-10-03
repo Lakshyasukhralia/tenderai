@@ -26,8 +26,10 @@ const SearchContainer = styled.div`
 
 const Heading = styled.p`
   text-align: left;
-  width: 63%;
+  width: 100%;
+  max-width: 1200px; /* Same width as SearchInput */
   font-size: 3rem;
+  margin-bottom: 20px; /* Add some space between the heading and input */
 `;
 
 const SearchInput = styled.input`
