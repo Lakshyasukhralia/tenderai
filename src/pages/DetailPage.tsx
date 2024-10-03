@@ -1,8 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom'; // Assuming you are using React Router for navigation
+import styled from 'styled-components';
 
-// Styled components for the detail page
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,6 +10,10 @@ const DetailContainer = styled.div`
   padding: 50px;
   background-color: #f1f3f4;
   min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding: 20px; /* Reduce padding on mobile */
+  }
 `;
 
 const DetailCard = styled.div`
@@ -18,20 +21,30 @@ const DetailCard = styled.div`
   border-radius: 10px;
   padding: 40px;
   width: 100%;
-  min-width: 1200px;
+  max-width: 1200px;
   min-height: 100vh;
-  height: 100%;
+  height: auto; /* Allow the height to adjust to content */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   display: flex;
   flex-direction: column; /* Flexbox for vertical layout */
   justify-content: space-between; /* Space between content and button */
+
+  @media (max-width: 768px) {
+    padding: 20px; /* Reduce padding on mobile */
+    min-width: auto; /* Remove the fixed width on mobile */
+    width: 100%; /* Take the full width on mobile */
+  }
 `;
 
 const ItemTitle = styled.h1`
   font-size: 2rem;
   color: #1a73e8; /* Similar to your theme color */
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem; /* Reduce font size on mobile */
+  }
 `;
 
 const ItemDescription = styled.p`
@@ -40,7 +53,26 @@ const ItemDescription = styled.p`
   line-height: 1.6;
   margin-bottom: 20px;
   flex-grow: 1; /* Allows the description to grow and push the button down */
+
+  @media (max-width: 768px) {
+    font-size: 1rem; /* Reduce font size on mobile */
+  }
 `;
+
+const TenderImage = styled(motion.img)`
+  display: block;  /* Ensures the image behaves like a block element */
+  margin: 40px auto;  /* Centers the image horizontally */
+  max-width: 60%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    margin: 20px auto;  /* Smaller margin on mobile */
+    max-width: 100%;  /* Full width on mobile */
+  }
+`;
+
 
 const ApplyButton = styled.a`
   display: inline-block;
@@ -55,6 +87,11 @@ const ApplyButton = styled.a`
 
   &:hover {
     background-color: #1558c4;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 15px; /* Reduce padding on mobile */
+    font-size: 1rem; /* Slightly reduce font size on mobile */
   }
 `;
 
@@ -78,6 +115,13 @@ const DetailPage = () => {
     <DetailContainer>
       <DetailCard>
         <ItemTitle>{item.title}</ItemTitle>
+        <TenderImage
+          src="https://picsum.photos/800/500"
+          alt="Tenderai Dashboard Preview"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+        />
         <ItemDescription>{item.description}</ItemDescription>
       </DetailCard>
       <ApplyButton>Apply</ApplyButton>
