@@ -28,8 +28,8 @@ const HeroSection = styled.section`
   padding-bottom: 100px; /* Account for the fixed header */
 
   @media (max-width: 768px) {
-    padding-top: 80px;  /* Adjust padding on mobile */
-  padding-bottom: 80px; /* Account for the fixed header */
+    padding-top: 90px;  /* Adjust padding on mobile */
+    padding-bottom: 80px; /* Account for the fixed header */
   }
 `;
 
@@ -65,8 +65,8 @@ const HeroImage = styled(motion.img)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
-    margin-top: 20px;  /* Smaller margin on mobile */
-    max-width: 100%;  /* Full width on mobile */
+    margin-top: 40px;  /* Smaller margin on mobile */
+    max-width: 90%;  /* Full width on mobile */
   }
 `;
 
