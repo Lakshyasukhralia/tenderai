@@ -119,9 +119,14 @@ const ItemDate = styled.p`
   align-self: flex-end;  /* Aligns the date to the right */
 `;
 
+// Options for the dropdown
+const sortOptions = ["None", "Alphabetical", "Date"];
+const categoryOptions = ["None", "Construction", "Digital Goods", "Marketing"];
+
 const ListingPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>(''); // Specify the type as string
   const [sortType, setSortType] = useState<string>(''); // Specify the type as string
+  const [categoryType, setCategoryType] = useState<string>(''); // Specify the type as string
   const [itemsData, setItemsData] = useState<TenderItem[]>([]); // State to store fetched data with type TenderItem[]
   const [loading, setLoading] = useState<boolean>(true); // State to handle loading with boolean type
 
@@ -169,10 +174,17 @@ const ListingPage = () => {
       />
 
       {/* Sorting options */}
+
       <FilterContainer>
+        <FilterLabel>Category:</FilterLabel>
+        <CustomDropdown
+          handleSelect={(option: string) => setCategoryType(option)}
+          options={categoryOptions}
+        />
         <FilterLabel>Sort By:</FilterLabel>
         <CustomDropdown
           handleSelect={(option: string) => setSortType(option)}
+          options={sortOptions}
         />
       </FilterContainer>
 

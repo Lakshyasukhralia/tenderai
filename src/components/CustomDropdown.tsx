@@ -75,12 +75,11 @@ const ArrowIcon = styled.span<ArrowIconProps>`
 
 interface CustomDropdownProps {
   handleSelect: (option: string) => void;  // Function prop accepting a string
+  options: string[];
 }
 
-// Options for the dropdown
-const options = ["None", "Alphabetical", "Date"];
 
-const CustomDropdown: React.FC<CustomDropdownProps> = ({ handleSelect }) => {
+const CustomDropdown: React.FC<CustomDropdownProps> = ({ handleSelect, options }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
