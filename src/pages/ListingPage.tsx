@@ -1,17 +1,18 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CustomDropdown from '../components/CustomDropdown';
 
 // Sample items with title and date for sorting
 const itemsData = [
-  { title: 'Tender 1', description: 'Description for Tender 1', date: '2024-09-28' },
-  { title: 'Tender 2', description: 'Description for Tender 2', date: '2024-09-25' },
-  { title: 'Tender 3', description: 'Description for Tender 3', date: '2024-09-30' },
-  { title: 'Tender 4', description: 'Description for Tender 4', date: '2024-09-22' },
-  { title: 'Tender 5', description: 'Description for Tender 5', date: '2024-09-27' },
-  { title: 'Tender 6', description: 'Description for Tender 6', date: '2024-09-28' },
-  { title: 'Tender 7', description: 'Description for Tender 7', date: '2024-09-29' },
-  { title: 'Tender 8', description: 'Description for Tender 8', date: '2024-09-30' }
+  { id: "1", title: 'Tender 1', description: 'Description for Tender 1', date: '2024-09-28' },
+  { id: "2", title: 'Tender 2', description: 'Description for Tender 2', date: '2024-09-25' },
+  { id: "3", title: 'Tender 3', description: 'Description for Tender 3', date: '2024-09-30' },
+  { id: "4", title: 'Tender 4', description: 'Description for Tender 4', date: '2024-09-22' },
+  { id: "5", title: 'Tender 5', description: 'Description for Tender 5', date: '2024-09-27' },
+  { id: "6", title: 'Tender 6', description: 'Description for Tender 6', date: '2024-09-28' },
+  { id: "7", title: 'Tender 7', description: 'Description for Tender 7', date: '2024-09-29' },
+  { id: "8", title: 'Tender 8', description: 'Description for Tender 8', date: '2024-09-30' }
 ];
 
 // Styled components for layout
@@ -120,7 +121,7 @@ const ItemDescription = styled.p`
   color: #666;
 `;
 
-const SearchPage = () => {
+const ListingPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(''); // State to track sorting type
 
@@ -155,14 +156,16 @@ const SearchPage = () => {
         <FilterLabel>Sort By:</FilterLabel>
         <CustomDropdown handleSelect={function (option: string): void {
           setSortType(option)
-        } } />
+        }} />
       </FilterContainer>
       {/* Displaying filtered and sorted items */}
       <ItemList>
         {filteredItems.map((item, index) => (
-          <ListItem key={index}>
-            <ItemTitle>{item.title}</ItemTitle>
-            <ItemDescription>{item.description}</ItemDescription>
+          <ListItem key={item.id}>
+            <Link to={`/tender/${item.id}`}>
+              <ItemTitle>{item.title}</ItemTitle>
+              <ItemDescription>{item.description}</ItemDescription>
+            </Link>
           </ListItem>
         ))}
       </ItemList>
@@ -170,4 +173,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default ListingPage;
