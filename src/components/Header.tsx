@@ -107,7 +107,7 @@ const Header = () => {
         </ul>
       </NavLinks>
       <ButtonsContainer>
-        <LoginButton href="#login">Login</LoginButton>
+        {/* <LoginButton href="#login">Login</LoginButton> */}
         <CTAButton href="#book-demo">Book Demo</CTAButton>
       </ButtonsContainer>
     </HeaderContainer>

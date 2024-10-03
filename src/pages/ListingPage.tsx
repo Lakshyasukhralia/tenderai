@@ -55,6 +55,9 @@ const SearchInput = styled.input`
   &:not(:focus) {
     border-color: #ccc;
   }
+  @media (max-width: 768px) {
+  padding: 14px;
+  }
 `;
 
 const FilterContainer = styled.div`
