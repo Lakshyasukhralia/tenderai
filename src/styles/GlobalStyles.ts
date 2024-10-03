@@ -27,4 +27,35 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+     /* Apply font styles globally to inputs, textareas, and selects */
+  input, textarea, select {
+    font-family: 'Poppins', sans-serif;  /* Ensure Poppins font applies to input text */
+    font-size: 1rem;  /* Global font size for input text */
+    color: #333;  /* Global input text color */
+  }
+
+  /* Placeholder styling globally */
+  ::-webkit-input-placeholder {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #888;  /* Color for placeholder text */
+  }
+
+  ::-moz-placeholder { /* For Firefox 19+ */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #888;
+  }
+
+  :-ms-input-placeholder { /* For Internet Explorer 10+ */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #888;
+  }
+
+  ::placeholder {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #888;  /* Color for placeholder text */
+  }
 `;

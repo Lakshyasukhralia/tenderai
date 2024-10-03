@@ -1,19 +1,16 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CustomDropdown from '../components/CustomDropdown';
+import { Link } from 'react-router-dom';
 
-// Sample items with title and date for sorting
-const itemsData = [
-  { id: "1", title: 'Tender 1', description: 'Description for Tender 1', date: '2024-09-28' },
-  { id: "2", title: 'Tender 2', description: 'Description for Tender 2', date: '2024-09-25' },
-  { id: "3", title: 'Tender 3', description: 'Description for Tender 3', date: '2024-09-30' },
-  { id: "4", title: 'Tender 4', description: 'Description for Tender 4', date: '2024-09-22' },
-  { id: "5", title: 'Tender 5', description: 'Description for Tender 5', date: '2024-09-27' },
-  { id: "6", title: 'Tender 6', description: 'Description for Tender 6', date: '2024-09-28' },
-  { id: "7", title: 'Tender 7', description: 'Description for Tender 7', date: '2024-09-29' },
-  { id: "8", title: 'Tender 8', description: 'Description for Tender 8', date: '2024-09-30' }
-];
+// Define types for the tender items
+interface TenderItem {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+}
 
 // Styled components for layout
 const SearchContainer = styled.div`
@@ -25,6 +22,12 @@ const SearchContainer = styled.div`
   width: 100%;
   padding: 20px;
   background-color: #f1f1f1;
+`;
+
+const Heading = styled.p`
+  text-align: left;
+  width: 63%;
+  font-size: 3rem;
 `;
 
 const SearchInput = styled.input`
@@ -64,32 +67,6 @@ const FilterLabel = styled.label`
   color: #333;
 `;
 
-// Custom styled select with a new arrow and improved design
-const FilterSelect = styled.select`
-  appearance: none; /* Remove default dropdown arrow */
-  padding: 12px 20px; /* Padding for a comfortable clickable area */
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMzMzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDE1LjA1bDYtNkg2bDYgNnoiLz48L3N2Zz4=');
-  background-repeat: no-repeat;
-  background-position: right 15px center; /* Adjust arrow position */
-  background-size: 18px; /* Make the arrow slightly larger */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-
-  &:focus {
-    border-color: #1a73e8;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    outline: none;
-  }
-
-  &:hover {
-    border-color: #1a73e8;
-  }
-`;
-
 const ItemList = styled.ul`
   list-style-type: none;
   padding: 0;
@@ -104,6 +81,9 @@ const ListItem = styled.li`
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;  /* Stack items vertically */
+  align-items: flex-start;  /* Align items to the start (left) */
 
   &:hover {
     transform: translateY(-5px);
@@ -119,13 +99,39 @@ const ItemTitle = styled.h3`
 const ItemDescription = styled.p`
   font-size: 0.9rem;
   color: #666;
+  margin-bottom: 10px;  /* Add some space between description and date */
+`;
+
+const ItemDate = styled.p`
+  font-size: 0.7rem;
+  color: #666;
+  align-self: flex-end;  /* Aligns the date to the right */
 `;
 
 const ListingPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState(''); // State to track sorting type
+  const [searchTerm, setSearchTerm] = useState<string>(''); // Specify the type as string
+  const [sortType, setSortType] = useState<string>(''); // Specify the type as string
+  const [itemsData, setItemsData] = useState<TenderItem[]>([]); // State to store fetched data with type TenderItem[]
+  const [loading, setLoading] = useState<boolean>(true); // State to handle loading with boolean type
 
-  // Filter items based on search term
+  // Fetch data from API
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        setLoading(true); // Set loading state
+        const response = await axios.get<TenderItem[]>('https://dummyjson.com/c/2504-65e3-4f57-96e0'); // Replace with your API URL and specify response type
+        setItemsData(response.data); // Assuming the API returns data directly in response.data
+        setLoading(false); // Set loading state to false after data is fetched
+      } catch (error) {
+        console.error('Error fetching data', error);
+        setLoading(false); // Ensure loading is disabled even if there's an error
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  // Filter and sort the fetched items
   const filteredItems = itemsData
     .filter((item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -142,11 +148,11 @@ const ListingPage = () => {
 
   return (
     <SearchContainer>
-      <h1>Search Tenders</h1>
+      <Heading>Search Tenders.</Heading>
       {/* Search input field */}
       <SearchInput
         type="text"
-        placeholder="Search for a tender..."
+        placeholder="Enter your search query here.."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -154,21 +160,27 @@ const ListingPage = () => {
       {/* Sorting options */}
       <FilterContainer>
         <FilterLabel>Sort By:</FilterLabel>
-        <CustomDropdown handleSelect={function (option: string): void {
-          setSortType(option)
-        }} />
+        <CustomDropdown
+          handleSelect={(option: string) => setSortType(option)}
+        />
       </FilterContainer>
-      {/* Displaying filtered and sorted items */}
-      <ItemList>
-        {filteredItems.map((item, index) => (
-          <ListItem key={item.id}>
+
+      {loading ? (
+        <p>Loading...</p> // Show a loading message while fetching data
+      ) : (
+        <ItemList>
+          {filteredItems.map((item) => (
             <Link to={`/tender/${item.id}`}>
-              <ItemTitle>{item.title}</ItemTitle>
-              <ItemDescription>{item.description}</ItemDescription>
+              <ListItem key={item.id}>
+                <ItemTitle>{item.title}</ItemTitle>
+                <ItemDescription>{item.description}</ItemDescription>
+                <ItemDate>{item.date}</ItemDate>
+              </ListItem>
             </Link>
-          </ListItem>
-        ))}
-      </ItemList>
+          ))}
+        </ItemList>
+
+      )}
     </SearchContainer>
   );
 };

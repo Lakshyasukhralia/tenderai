@@ -93,7 +93,7 @@ const Hero = () => {
         animate={{ scale: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        Find Tender
+        Find Tenders
       </CTAButton>
 
       {/* Image Below Button */}
