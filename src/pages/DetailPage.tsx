@@ -51,6 +51,7 @@ const ItemDescription = styled.p`
   font-size: 1.2rem;
   color: #333;
   line-height: 1.6;
+  text-align: start;
   margin-bottom: 20px;
   flex-grow: 1; /* Allows the description to grow and push the button down */
 
