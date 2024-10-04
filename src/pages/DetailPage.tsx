@@ -12,7 +12,7 @@ const DetailContainer = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     padding: 20px; /* Reduce padding on mobile */
-    margin-top: 140px;
+    margin-top: 70px;
   }
 `;
 

@@ -20,12 +20,12 @@ const SearchContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  margin-top: 70px;
+  margin-top: 80px;
   width: 100%;
   padding: 20px;
   background-color: #f1f1f1;
     @media (max-width: 768px) {
-    margin-top: 150px;
+    margin-top: 70px;
   }
 `;
 

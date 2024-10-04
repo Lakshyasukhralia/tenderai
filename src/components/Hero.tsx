@@ -28,8 +28,8 @@ const HeroSection = styled.section`
   padding-bottom: 100px; /* Account for the fixed header */
 
   @media (max-width: 768px) {
-    padding-top: 90px;  /* Adjust padding on mobile */
-    padding-bottom: 80px; /* Account for the fixed header */
+    padding-top: 20px;  /* Adjust padding on mobile */
+    padding-bottom: 20px; /* Account for the fixed header */
   }
 `;
 
@@ -60,6 +60,7 @@ const SubHeading = styled(motion.p)`
 const HeroImage = styled(motion.img)`
   margin-top: 40px;
   max-width: 90%;
+  max-height: 70%;
   height: auto;
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -98,7 +99,8 @@ const Hero = () => {
 
       {/* Image Below Button */}
       <HeroImage
-        src="https://picsum.photos/1000/600"
+        // src="https://picsum.photos/1000/600"
+        src="hero_logo.jpeg"
         alt="Tenderai Dashboard Preview"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

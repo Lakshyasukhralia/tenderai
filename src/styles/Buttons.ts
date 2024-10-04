@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export const CTAButton = styled(motion.a)`
   padding: 10px 30px;
   background-color: #1a73e8;
-  color: white;
+  color: white !important;
   border-radius: 8px;
   font-size: 1.2rem;
   cursor: pointer;

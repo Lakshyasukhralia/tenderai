@@ -1,7 +1,8 @@
-
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CTAButton } from '../styles/Buttons';
+import { FaBars } from 'react-icons/fa'; // Ensure react-icons is installed and imported
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -15,9 +16,10 @@ const HeaderContainer = styled.header`
   z-index: 100;
 
   @media (max-width: 768px) {
-    flex-direction: column;  /* Stack the logo and buttons vertically on mobile */
+    flex-direction: row;
     align-items: center;
-    padding: 1rem;  /* Reduce padding for mobile */
+    padding: 1rem;
+    justify-content: space-between;
   }
 `;
 
@@ -25,15 +27,16 @@ const Logo = styled.h1`
   font-size: 1.8rem;
   color: #333;
   a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit the color from parent (Logo) */
+    text-decoration: none;
+    color: inherit;
   }
+
   @media (max-width: 768px) {
-    font-size: 1.5rem;  /* Reduce font size on mobile */
+    font-size: 1.5rem;
   }
 `;
 
-const NavLinks = styled.nav`
+const NavLinks = styled.nav<{ isOpen: boolean }>`
   ul {
     display: flex;
     list-style: none;
@@ -54,65 +57,105 @@ const NavLinks = styled.nav`
     }
   }
 
-  /* Remove vertical stacking on mobile */
   @media (max-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}; /* Hide by default on mobile */
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+
     ul {
-      justify-content: center;  /* Center the navigation links */
+      flex-direction: column;
+      align-items: center;
     }
+
     li {
-      margin-left: 10px;  /* Reduce the space between nav links on mobile */
+      margin: 10px 0;
     }
   }
 `;
 
-const ButtonsContainer = styled.div`
+const ButtonsContainer = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
 
-  /* Add space between buttons for desktop */
-  a:not(:last-child) {
-    margin-right: 10px;  /* Adds 10px of space between buttons on desktop */
-  }
-
   @media (max-width: 768px) {
-    flex-direction: column;  /* Stack buttons vertically on mobile */
+    flex-direction: column;
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
     margin-top: 10px;
 
-    /* Add space between the buttons on mobile */
     a:not(:last-child) {
-      margin-right: 0;  /* Remove margin-right for mobile */
-      margin-bottom: 10px;  /* Adds 10px of space between buttons */
+      margin-right: 0;
+      margin-bottom: 10px;
     }
   }
 `;
 
+const HamburgerIcon = styled(FaBars)`
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+
+  @media (max-width: 768px) {
+    display: block;
+    z-index: 101; /* Keep it above the navigation menu */
+  }
+`;
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+};
+
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <HeaderContainer>
-      <Logo><Link to="/">Tenderai</Link> </Logo>
-      <NavLinks>
+      <Logo>
+        <Link to="/">Tenderai</Link>
+      </Logo>
+
+      {/* Hamburger icon always visible on mobile */}
+      <HamburgerIcon onClick={toggleMenu} />
+
+      {/* Navigation Links */}
+      <NavLinks isOpen={menuOpen}>
         <ul>
           <li>
-            <Link to="features" >
-              RFPs
-            </Link>
+            <Link to="features">RFPs</Link>
           </li>
           <li>
-            <Link to="customers" >
-              Customers
-            </Link>
+            <Link to="customers">Customers</Link>
           </li>
           <li>
-            <Link to="final-check" >
-              Final Check
-            </Link>
+            <Link to="final-check">Final Check</Link>
           </li>
+          {isMobile && <li>
+            <CTAButton href="#book-demo">Book Demo</CTAButton>
+          </li>}
         </ul>
       </NavLinks>
-      <ButtonsContainer>
-        {/* <LoginButton href="#login">Login</LoginButton> */}
-        <CTAButton href="#book-demo">Book Demo</CTAButton>
-      </ButtonsContainer>
+      {!isMobile && <CTAButton href="#book-demo">Book Demo</CTAButton>}
     </HeaderContainer>
   );
 };
